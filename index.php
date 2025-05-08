@@ -148,18 +148,23 @@ function nebulaone_embed_script() {
         // Checks if all required options are set.
         if ($host_name && $gpt_system && $title) {
             // Constructs the URL for the external script.
-            $script_url = $host_name . ($use_alt_script ? '/embed/script-alt.js' : '/embed/script.js');
+            //$script_url = $host_name . ($use_alt_script ? '/embed/script-alt.js' : '/embed/script.js');
+            $script_url = plugin_dir_url(__FILE__) . ($use_alt_script ? 'script-alt.js' : 'script.js');
+
             // Registers the main external JavaScript file.
             wp_register_script('nebulaone-embed-main', $script_url, array(), null, true);
 
             // Constructs the inline JavaScript to pass configuration options to the script.
+            $plugin_base_url = plugins_url( 'N1AI' );
             $inline_script = "
             const nebulaInstance = {
                 hostName: '$host_name',
                 gptSystem: '$gpt_system',
-                title: '$title'
+                title: '$title',
+                pluginBaseUrl: '$plugin_base_url'
             };
             ";
+
             // Adds the inline script to be executed before the main script.
             wp_add_inline_script('nebulaone-embed-main', $inline_script, 'before');
 
