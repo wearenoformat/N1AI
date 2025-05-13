@@ -172,7 +172,7 @@
   66% { width: 82%; height: 82%; border-radius: 50%; }
 }
 
-@media screen and (min-width: 640px) {
+@media (hover: hover) {
   .nebulaOne.chat-button:hover > span {
     transform: scale(1.07);
   }
