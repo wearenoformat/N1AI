@@ -73,6 +73,7 @@
 
     chatButton.popover = 'manual'
     chatButton.className = 'nebulaOne chat-button'
+    chatButton.style.setProperty('opacity', 0)
     chatButton.addEventListener('click', openChatDialog)
 
     chatButton.appendChild(chatButtonIcon)
