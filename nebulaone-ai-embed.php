@@ -19,11 +19,25 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// Define the plugin root directory path for easier use
+if ( ! defined( 'N1AI_PLUGIN_DIR' ) ) {
+    define( 'N1AI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
+
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-nebulaone-ai.php';
+// This now correctly points to the new file we're creating
+require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-ai.php';
+
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-nebulaone-activator.php
+ */
+require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-activator.php';
+register_activation_hook( __FILE__, array( 'NebulaOne_Activator', 'activate' ) );
+
 
 /**
  * Begins execution of the plugin.
@@ -41,14 +55,11 @@ run_nebulaone_ai();
  * GitHub Plugin Updater.
  * This class handles checking for updates to the plugin on GitHub.
  */
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-nebulaone-ai-updater.php';
+require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-ai-updater.php';
 
 // Initialize the plugin updater
 add_action( 'init', 'nebulaone_ai_init_updater' );
 function nebulaone_ai_init_updater() {
-    // For a public repo, no PAT is strictly required for release info.
-    // If you experience rate limiting on downloads or need more robust access,
-    // you could reintroduce it, but it's not essential for public repos.
     $github_pat = ''; // No PAT needed for public repo access
     $branch_to_monitor = 'plugin-refactoring'; // Specify the branch for testing
 
