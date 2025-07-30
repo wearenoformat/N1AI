@@ -1,12 +1,18 @@
 <?php
-/**
- * Plugin Name: nebulaONE AI Embed Plugin
- * Description: A plugin to embed a nebulaONE AI instance in your WordPress site.
- * Version: 1.1
- * Author: Cloudforce
- * Text Domain: nebulaone-embed
- * Domain Path: /languages
- */
+/*
+Plugin Name: NebulaOne AI Embed
+Plugin URI: https://noformat.com/nebulaone-ai-plugin
+Description: A chat interface for NebulaOne AI, seamlessly integrated into your WordPress site.
+Version: 1.0.0
+Author: Noformat
+Author URI: https://noformat.com
+License: GPL2
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nebulaone-ai
+Domain Path: /languages
+
+Update URI: https://raw.githubusercontent.com/wearenoformat/N1AI/main/update.json
+*/
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,42 +21,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * admin-specific hooks, and public-facing hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-nebulaone-activator.php';
-require plugin_dir_path( __FILE__ ) . 'admin/class-nebulaone-admin.php';
-require plugin_dir_path( __FILE__ ) . 'public/class-nebulaone-public.php';
-
-/**
- * Register activation hook.
- * This will run once when the plugin is activated.
- */
-function activate_nebulaone_embed_plugin() {
-    NebulaOne_Activator::activate();
-}
-register_activation_hook( __FILE__, 'activate_nebulaone_embed_plugin' );
+require plugin_dir_path( __FILE__ ) . 'includes/class-nebulaone-ai.php';
 
 /**
  * Begins execution of the plugin.
  *
- * Since everything within the plugin is registered via hooks,
- * then this is all that is needed to be called to kick off the plugin.
+ * Since everything within the plugin is initiated from this class,
+ * calling it here will activate the plugin.
  */
-function run_nebulaone_embed_plugin() {
-    // These lines are causing the error because NebulaOne_Admin and NebulaOne_Public
-    // do not have a 'run()' method. Their constructors handle all necessary hooks.
-    $plugin_admin = new NebulaOne_Admin();
-    // $plugin_admin->run(); // REMOVE OR COMMENT OUT THIS LINE
-
-    $plugin_public = new NebulaOne_Public();
-    // $plugin_public->run(); // REMOVE OR COMMENT OUT THIS LINE
+function run_nebulaone_ai() {
+    $plugin = new NebulaOne_AI();
+    $plugin->run();
 }
-run_nebulaone_embed_plugin();
+run_nebulaone_ai();
 
-// Add a settings link in the plugin list page.
-function nebulaone_embed_settings_link( $links ) {
-    $settings_link = '<a href="options-general.php?page=nebulaone-embed-settings">' . esc_html__( 'Settings', 'nebulaone-embed' ) . '</a>';
-    array_unshift( $links, $settings_link );
-    return $links;
+/**
+ * GitHub Plugin Updater.
+ * This class handles checking for updates to the plugin on GitHub.
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-nebulaone-ai-updater.php';
+
+// Initialize the plugin updater
+add_action( 'init', 'nebulaone_ai_init_updater' );
+function nebulaone_ai_init_updater() {
+    // For a public repo, no PAT is strictly required for release info.
+    // If you experience rate limiting on downloads or need more robust access,
+    // you could reintroduce it, but it's not essential for public repos.
+    $github_pat = ''; // No PAT needed for public repo access
+    $branch_to_monitor = 'plugin-refactoring'; // Specify the branch for testing
+
+    new NebulaOne_AI_Updater( __FILE__, 'wearenoformat', 'N1AI', $github_pat, $branch_to_monitor );
 }
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'nebulaone_embed_settings_link' );
