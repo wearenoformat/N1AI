@@ -3,7 +3,7 @@
 Plugin Name: NebulaOne AI Embed
 Plugin URI: https://noformat.com/nebulaone-ai-plugin
 Description: A chat interface for NebulaOne AI, seamlessly integrated into your WordPress site.
-Version: 1.0.2
+Version: 1.0.01
 Author: Noformat
 Author URI: https://noformat.com
 License: GPL2
