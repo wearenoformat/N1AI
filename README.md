@@ -1,16 +1,5 @@
 # NebulaOne AI Embed
 
-**Plugin Name:** NebulaOne AI Embed
-**Plugin URI:** https://noformat.com/nebulaone-ai-plugin
-**Author:** Noformat
-**Author URI:** https://noformat.com
-**Version:** 1.0.1
-**License:** GPL2
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
-**Text Domain:** nebulaone-ai
-
----
-
 ### Description
 
 NebulaOne AI Embed is a WordPress plugin that seamlessly integrates a powerful chat interface for NebulaOne AI directly into your website. Enhance user engagement and provide instant, intelligent assistance by deploying your NebulaOne GPT Systems with ease.
