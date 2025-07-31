@@ -83,8 +83,6 @@ class NebulaOne_AI_Updater {
      */
     private function get_github_response() {
         if ( ! isset( $this->github_response ) ) {
-            // This URL fetches the latest release (tag) from the repository, regardless of branch.
-            // For updates, releases/tags are the standard.
             $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository );
 
             $args = array(
@@ -92,8 +90,6 @@ class NebulaOne_AI_Updater {
                 'headers' => array( 'Accept' => 'application/vnd.github.v3+json' )
             );
 
-            // Even for public repos, a PAT can help with higher rate limits for API calls.
-            // But it's not strictly required for public repo *information*.
             if ( $this->authorize_token ) {
                 $args['headers']['Authorization'] = 'token ' . $this->authorize_token;
             }
@@ -124,17 +120,14 @@ class NebulaOne_AI_Updater {
         $plugin_data = $this->get_plugin_data();
         $github_response = $this->get_github_response();
 
-        // Ensure GitHub response is valid and current version is lower than latest release tag
         if ( $github_response && version_compare( $github_response->tag_name, $plugin_data['Version'], '>' ) ) {
             $new_version_info = new stdClass();
             $new_version_info->slug        = $this->plugin_slug;
             $new_version_info->new_version = $github_response->tag_name;
             $new_version_info->url         = $plugin_data['PluginURI'];
 
-            $package_url = $github_response->zipball_url; // Default to GitHub's generated zipball for the tag
+            $package_url = $github_response->zipball_url;
 
-            // Check if there's a specific .zip asset attached to the release
-            // This is preferred as it gives you control over the package structure.
             $zip_asset = null;
             if ( isset( $github_response->assets ) && is_array( $github_response->assets ) ) {
                 foreach ( $github_response->assets as $asset ) {
@@ -148,13 +141,6 @@ class NebulaOne_AI_Updater {
             if ( $zip_asset ) {
                 $package_url = $zip_asset->browser_download_url;
             }
-
-            // For public repos, you typically don't need the token in the download URL.
-            // If GitHub has specific rate limits or authentication for direct asset downloads
-            // even for public repos, you could re-enable this.
-            // if ( $this->authorize_token ) {
-            //     $package_url = add_query_arg( 'token', $this->authorize_token, $package_url );
-            // }
 
             $new_version_info->package = $package_url;
             $transient->response[ $this->basename ] = $new_version_info;
@@ -207,10 +193,6 @@ class NebulaOne_AI_Updater {
             $download_link = $zip_asset->browser_download_url;
         }
 
-        // No token needed in download URL for public assets/repos
-        // if ( $this->authorize_token ) {
-        //      $download_link = add_query_arg( 'token', $this->authorize_token, $download_link );
-        // }
         $result->download_link     = $download_link;
 
 
