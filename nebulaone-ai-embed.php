@@ -3,7 +3,7 @@
 Plugin Name: NebulaOne AI Embed
 Plugin URI: https://github.com/wearenoformat/N1AI
 Description: A chat interface for NebulaOne AI, seamlessly integrated into your WordPress site.
-Version: 1.0.2
+Version: 1.0.3
 Author: Cloudforce
 Author URI: https://gocloudforce.com/
 License: GPL2

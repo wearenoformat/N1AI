@@ -119,14 +119,24 @@ class NebulaOne_AI_Updater {
 
         $plugin_data = $this->get_plugin_data();
         $github_response = $this->get_github_response();
+        
+        $is_update_available = false;
+        if ($github_response && is_object($github_response)) {
+            $local_ver = preg_replace('/[^0-9\.]/', '', $plugin_data['Version']);
+            $github_ver = preg_replace('/[^0-9\.]/', '', $github_response->tag_name);
+            
+            if ( version_compare( $github_ver, $local_ver, '>' ) ) {
+                $is_update_available = true;
+            }
+        }
 
-        if ( $github_response && version_compare( $github_response->tag_name, $plugin_data['Version'], '>' ) ) {
+        if ( $is_update_available ) {
             $new_version_info = new stdClass();
             $new_version_info->slug        = $this->plugin_slug;
             $new_version_info->new_version = $github_response->tag_name;
             $new_version_info->url         = $plugin_data['PluginURI'];
 
-            $package_url = $github_response->zipball_url;
+            $package_url = $github_response->zipball_url; 
 
             $zip_asset = null;
             if ( isset( $github_response->assets ) && is_array( $github_response->assets ) ) {
@@ -141,7 +151,7 @@ class NebulaOne_AI_Updater {
             if ( $zip_asset ) {
                 $package_url = $zip_asset->browser_download_url;
             }
-
+            
             $new_version_info->package = $package_url;
             $transient->response[ $this->basename ] = $new_version_info;
         }
