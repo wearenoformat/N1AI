@@ -10,13 +10,21 @@
   overflow: visible;
   background: transparent;
   margin: auto;
-  margin-right: 24px;
+  margin-right: 24px; /* Default: Align right */
   margin-bottom: 24px;
   cursor: pointer;
   border: 0;
   animation: nebulaOne-scale-in 0.5s ease-out forwards;
   -webkit-appearance: none
 }
+
+/* Styles for left-aligned chat button */
+.nebulaOne.chat-button.left {
+  margin-left: 24px;
+  margin-right: auto;
+}
+
+
 .nebulaOne.chat-button > span {
   position: relative; display: flex; align-items: center; justify-content: center;
   width: 60px; height: 60px;
@@ -118,9 +126,9 @@
 
 @keyframes circle1 {
   0%, 100% { transform: rotate(30deg); width: 85%; height: 85%; border-radius: 60% 60% 50% 50% / 60% 60% 40% 40%; }
-  25% { ransform: rotate(135deg) translateX(2px); width: 82%; height: 85%; border-radius: 60% 60% 50% 50% / 50% 50% 50% 50%; }
-  50% { ransform: rotate(90deg) translateX(4px); width: 85%; height: 82%; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
-  75% { ransform: rotate(45deg) translateX(2px); width: 82%; height: 85%; border-radius: 60% 60% 50% 50% / 50% 50% 60% 60%; }
+  25% { transform: rotate(135deg) translateX(2px); width: 82%; height: 85%; border-radius: 60% 60% 50% 50% / 50% 50% 50% 50%; }
+  50% { transform: rotate(90deg) translateX(4px); width: 85%; height: 82%; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+  75% { transform: rotate(45deg) translateX(2px); width: 82%; height: 85%; border-radius: 60% 60% 50% 50% / 50% 50% 60% 60%; }
 }
 @keyframes circle2 {
   0%, 100% { transform: rotate(0deg) scale(1.1); width: 80%; height: 82%; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
@@ -140,15 +148,15 @@
 }
 @keyframes circle8 {
   0%, 100% { transform: rotate(30deg); width: 85%; height: 85%; border-radius: 50%; }
-  25% { ransform: rotate(135deg) translateX(2px); width: 85%; height: 85%; border-radius: 45%; }
-  50% { ransform: rotate(90deg) translateX(3px); width: 85%; height: 85%; border-radius: 50%; }
-  75% { ransform: rotate(45deg) translateX(2px); width: 85%; height: 85%; border-radius: 45%; }
+  25% { transform: rotate(135deg) translateX(2px); width: 85%; height: 85%; border-radius: 45%; }
+  50% { transform: rotate(90deg) translateX(3px); width: 85%; height: 85%; border-radius: 50%; }
+  75% { transform: rotate(45deg) translateX(2px); width: 85%; height: 85%; border-radius: 45%; }
 }
 
 
 @keyframes spin1 {
-  from { transform: rotate(0deg) scale(1.05);; }
-  to { transform: rotate(360deg) scale(1.2);; }
+  from { transform: rotate(0deg) scale(1.05); }
+  to { transform: rotate(360deg) scale(1.2); }
 }
 
 @keyframes spin2 {
@@ -201,6 +209,17 @@
   animation: nebulaOne-backdrop-fade-in 0.7s ease-in forwards;
   background-color: rgb(0 0 0 / 50%);
 }
+
+/* Styles for left-aligned chat dialog */
+.nebulaOne.chat-dialog.left {
+  margin: 0px auto 0px 0px;
+}
+/* New animation for left slide-in for the dialog */
+.nebulaOne.chat-dialog.left[open] {
+  animation: nebulaOne-slide-in-left 0.5s ease-out;
+}
+
+
 .nebulaOne.chat-dialog > form {
   display: flex;
   flex-direction: column;
@@ -266,9 +285,24 @@
   0% {
       transform: translateX(100%);
   }
+  100% {
+      transform: translateX(0%);
+  }
+}
+/* New animation for the dialog sliding in from the left */
+@keyframes nebulaOne-slide-in-left {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(0%);
+  }
 }
 @keyframes nebulaOne-backdrop-fade-in {
   0% {
       background-color: rgb(0 0 0 / 0%);
+  }
+  100% {
+      background-color: rgb(0 0 0 / 50%);
   }
 }
