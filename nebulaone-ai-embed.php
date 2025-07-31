@@ -3,13 +3,15 @@
 Plugin Name: NebulaOne AI Embed
 Plugin URI: https://github.com/wearenoformat/N1AI
 Description: A chat interface for NebulaOne AI, seamlessly integrated into your WordPress site.
-Version: 1.0.1
+Version: 1.0.1.1
 Author: Cloudforce
 Author URI: https://gocloudforce.com/
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: nebulaone-ai
 Domain Path: /languages
+
+Update URI: https://raw.githubusercontent.com/wearenoformat/N1AI/main/update.json
 */
 
 // Exit if accessed directly.
@@ -26,7 +28,6 @@ if ( ! defined( 'N1AI_PLUGIN_DIR' ) ) {
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing hooks.
  */
-// This now correctly points to the new file we're creating
 require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-ai.php';
 
 /**
@@ -58,8 +59,8 @@ require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-ai-updater.php';
 // Initialize the plugin updater
 add_action( 'init', 'nebulaone_ai_init_updater' );
 function nebulaone_ai_init_updater() {
-    $github_pat = ''; // No PAT needed for public repo access
-    $branch_to_monitor = 'main'; // Specify the branch for testing
+    $github_pat = '';
+    $branch_to_monitor = 'main';
 
     new NebulaOne_AI_Updater( __FILE__, 'wearenoformat', 'N1AI', $github_pat, $branch_to_monitor );
 }
