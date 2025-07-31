@@ -4,7 +4,7 @@
 
 NebulaOne AI Embed is a WordPress plugin that seamlessly integrates a powerful chat interface for NebulaOne AI directly into your website. Enhance user engagement and provide instant, intelligent assistance by deploying your NebulaOne GPT Systems with ease.
 
-This plugin supports automatic updates directly from its GitHub repository, ensuring you always have the latest features and fixes.
+NebulaOne information can be found at [https://nebulaone.ai/](https://nebulaone.ai/).
 
 ### Installation
 
