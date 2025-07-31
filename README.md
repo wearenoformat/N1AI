@@ -37,7 +37,7 @@ Once installed and configured:
 
 **Admin Settings:**
 
-- **Host Name:** The full URL of your NebulaOne AI host (e.g., `https://your.nebulaone.ai`).
+- **Host Name:** The full URL of your NebulaOne AI host.
 - **GPT System:** The specific GPT system endpoint configured under your NebulaOne AI's "Publish GPT" section.
 - **Title:** The title that will be displayed on the chat pop-up window.
 - **Align button to left:** Check this box to align the chat button to the left side of the screen instead of the default right.
@@ -52,7 +52,7 @@ For a detailed list of changes, improvements, and bug fixes, please refer to the
 
 ### Support
 
-For support and inquiries, please visit our website: [https://noformat.com](https://noformat.com)
+For support and inquiries, please visit our website: [https://gocloudforce.com/](https://gocloudforce.com/)
 
 ### Contributing
 

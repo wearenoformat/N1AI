@@ -11,7 +11,7 @@
  * @since      1.0.0
  * @package    NebulaOne_AI
  * @subpackage NebulaOne_AI/includes
- * @author     Noformat
+ * @author     Cloudforce
  */
 class NebulaOne_AI {
 

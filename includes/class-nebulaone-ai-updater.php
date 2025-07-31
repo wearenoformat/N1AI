@@ -2,7 +2,7 @@
 /**
  * Fired during plugin updates from GitHub.
  *
- * @link       https://noformat.com
+ * @link       https://gocloudforce.com/
  * @since      1.0.0
  *
  * @package    NebulaOne_AI
@@ -73,7 +73,7 @@ class NebulaOne_AI_Updater {
      *
      * IMPORTANT: The GitHub `releases/latest` API endpoint always returns the latest *tag-based release*
      * across ALL branches. To truly "test from a branch" you must create your releases (tags)
-     * *on* or *from* your specified branch (`plugin-refactoring` in this case).
+     * *on* or *from* your specified branch (`main` in this case).
      *
      * If you wanted to get the latest commit from a branch (not a release), the API call
      * and subsequent parsing would be different (e.g., `https://api.github.com/repos/%s/%s/commits/%s`).

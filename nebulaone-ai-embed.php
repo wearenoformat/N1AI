@@ -1,17 +1,15 @@
 <?php
 /*
 Plugin Name: NebulaOne AI Embed
-Plugin URI: https://noformat.com/nebulaone-ai-plugin
+Plugin URI: https://github.com/wearenoformat/N1AI
 Description: A chat interface for NebulaOne AI, seamlessly integrated into your WordPress site.
-Version: 1.0.1.1
-Author: Noformat
-Author URI: https://noformat.com
+Version: 1.0
+Author: Cloudforce
+Author URI: https://gocloudforce.com/
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: nebulaone-ai
 Domain Path: /languages
-
-Update URI: https://raw.githubusercontent.com/wearenoformat/N1AI/main/update.json
 */
 
 // Exit if accessed directly.
@@ -61,7 +59,7 @@ require_once N1AI_PLUGIN_DIR . 'includes/class-nebulaone-ai-updater.php';
 add_action( 'init', 'nebulaone_ai_init_updater' );
 function nebulaone_ai_init_updater() {
     $github_pat = ''; // No PAT needed for public repo access
-    $branch_to_monitor = 'plugin-refactoring'; // Specify the branch for testing
+    $branch_to_monitor = 'main'; // Specify the branch for testing
 
     new NebulaOne_AI_Updater( __FILE__, 'wearenoformat', 'N1AI', $github_pat, $branch_to_monitor );
 }
